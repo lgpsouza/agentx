@@ -1,9 +1,10 @@
-from datetime import datetime
+# src/main.py
+from config import AGENT_NAME
+from agent import AgentX
 
-def agentx_hello():
-    print("🤖 AgentX inicializado com sucesso!")
-    print(f"Data/Hora: {datetime.now()}")
-    print("Pronto para receber comandos...")
+def agentx_start():
+    print(f"🤖 {AGENT_NAME} inicializado!")
+    AgentX(AGENT_NAME).run()
 
 if __name__ == "__main__":
-    agentx_hello()
+    agentx_start()
