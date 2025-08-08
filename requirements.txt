@@ -1,1 +1,5 @@
 requests
+agno
+openai
+duckduckgo-search
+packaging
