@@ -3,3 +3,5 @@ agno
 openai
 duckduckgo-search
 packaging
+crewai
+crewai-tools
