@@ -5,3 +5,6 @@ duckduckgo-search
 packaging
 crewai
 crewai-tools
+langchain
+langchain-community
+faiss-cpu
