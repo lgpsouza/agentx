@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  agentx:
+    build: .
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: ["python", "src/main.py"]
+
+  agentx-agno:
+    build: .
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: ["python", "src/agentx_agno.py"]
+
+  agentx-langchain:
+    build: .
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: ["python", "src/agentx_langchain.py"]
+
+  agentx-langchain-faiss:
+    build: .
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./data:/app/data
+    command: ["python", "src/agentx_langchain_faiss.py"]
+
+  agentx-crewai:
+    build: .
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: ["python", "src/agentx_crewai.py"]
