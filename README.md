@@ -1,85 +1,124 @@
-# 🤖 AgentX — Agente Inteligente Modular
+# 🤖 AgentX — Curso de IA e Agentes Inteligentes
 
-AgentX é um projeto de aprendizado progressivo para criar, orquestrar e implantar agentes inteligentes usando Python, Docker e frameworks modernos de IA.
+## 📚 Sobre o Projeto
 
----
-
-## 📅 Roadmap de Módulos
-
-### ✅ Módulo 1 — Fundamentos de IA, Python e Docker
-- Estrutura inicial do projeto.
-- Controle de versão com Git/GitHub.
-- Execução local e em container Docker.
-- **Mini-projeto:** Esqueleto do AgentX funcional.
-
-### ✅ Módulo 2 — Criando seu Primeiro Agente em Python (CLI)
-- Loop interativo (REPL) para receber comandos.
-- Comandos: `hora`, `buscar <termo>` (Wikipédia), `ajuda`, `sair`.
-- Estrutura modular (`agent.py`, `main.py`, `utils.py`).
-- **Mini-projeto:** AgentX-CLI interativo.
-
-### ✅ Módulo 3 — Frameworks de Agentes: Agno (Parte 1)
-- Integração com **Agno**.
-- Uso de modelos LLM (GPT-4o-mini via OpenAI).
-- Ferramenta customizada de busca na web usando `duckduckgo-search`.
-- **Mini-projeto:** AgentX com LLM + ferramenta de busca.
-
-### ⏳ Módulo 3 — Frameworks de Agentes: CrewAI (Parte 2)
-- Próxima etapa: criar agente com **CrewAI** para colaboração entre múltiplos papéis.
-
-### 🔜 Módulo 4 — LangChain e Memória de Agentes
-- Adicionar memória de curto e longo prazo.
-- Contexto persistente entre interações.
-
-### 🔜 Módulo 5 — Integrações e Automação
-- Conexão com APIs externas.
-- Execução de automações reais.
-
-### 🔜 Módulo 6 — Orquestração, Multi-Agentes e Implantação
-- Orquestração entre múltiplos agentes.
-- Deploy em servidor/nuvem.
+Este repositório acompanha o curso **"Do Zero ao Avançado em IA e Agentes Inteligentes"**, onde construímos passo a passo o AgentX: um agente conversacional inteligente em Python, com integração a frameworks modernos de IA, memória e automação.
 
 ---
 
-## 📂 Estrutura Atual do Projeto
-```
-agentx/
-│
-├── src/
-│   ├── main.py             # Entrada do agente CLI
-│   ├── agent.py            # Lógica do agente CLI
-│   ├── agentx_agno.py      # Lógica do agente com Agno
-│   ├── config.py           # Configurações globais
-│   ├── utils.py            # Funções auxiliares
-│   └── __init__.py
-│
-├── requirements.txt        # Dependências
-├── Dockerfile              # Configuração de build
-├── README.md               # Documentação
-└── modulo_XX_resumo.md     # Resumos de cada módulo
-```
+## 📦 Módulos Concluídos
+
+### **Módulo 1 — Fundamentos de IA, Python e Docker**
+
+* Estrutura inicial do projeto.
+* Dockerfile e requirements.txt.
+* Execução do "Hello World" com Python dentro do container.
+
+### **Módulo 2 — Criando seu Primeiro Agente em Python**
+
+* `main.py` com entrada/saída no terminal.
+* Estrutura modular para evolução futura.
+* Execução local e via Docker.
+
+### **Módulo 3 — Frameworks de Agentes: Agno e CrewAI**
+
+* **Agno**: agente simples com ferramentas e memória.
+* **CrewAI**: orquestração de agentes com papéis e tarefas.
+* Docker adaptado para cada agente.
+
+### **Módulo 4 — LangChain e Memória de Agentes**
+
+* **Memória de curto prazo** com `RunnableWithMessageHistory`.
+* **Memória persistente** com FAISS.
+* Atualização para evitar classes deprecadas no LangChain.
+* Padronização com `.env` e `docker-compose.yml` para rodar qualquer módulo facilmente.
 
 ---
 
 ## 🚀 Como Rodar
-### Localmente
+
+### 1. Preparar ambiente
+
 ```bash
-python src/main.py
-```
-ou
-```bash
-python src/agentx_agno.py
+cp .env.example .env
+# edite o .env e insira suas chaves
 ```
 
-### Docker
-```bash
-docker build -t agentx .
-docker run --rm agentx
-```
+No `.env`:
 
-Para rodar a versão Agno com chave OpenAI:
-```bash
-docker run -it --rm -e OPENAI_API_KEY=$OPENAI_API_KEY agentx python src/agentx_agno.py
+```dotenv
+OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SERPER_API_KEY=serper_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 ---
+
+### 2. Build da imagem
+
+```bash
+docker compose build
+```
+
+---
+
+### 3. Executar cada módulo
+
+**CLI básico (Módulo 2)**
+
+```bash
+docker compose run --rm agentx
+```
+
+**Agno (Módulo 3.1)**
+
+```bash
+docker compose run --rm agentx-agno
+```
+
+**CrewAI (Módulo 3.2)**
+
+```bash
+docker compose run --rm agentx-crewai
+```
+
+**LangChain — memória curta (Módulo 4.1)**
+
+```bash
+docker compose run --rm agentx-langchain
+```
+
+**LangChain + FAISS — memória persistente (Módulo 4.2)**
+
+```bash
+docker compose run --rm agentx-langchain-faiss
+```
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+agentx/
+ ├── src/
+ │    ├── main.py
+ │    ├── agentx_agno.py
+ │    ├── agentx_crewai.py
+ │    ├── agentx_langchain.py
+ │    ├── agentx_langchain_faiss.py
+ ├── requirements.txt
+ ├── Dockerfile
+ ├── docker-compose.yml
+ ├── .env.example
+ ├── .gitignore
+ └── data/
+      └── .gitkeep
+```
+
+---
+
+## 📌 Próximos Passos
+
+* **Módulo 5 — Integrações e Automação**
+
+  * Conectar agentes a APIs externas.
+  * Automação de tarefas com dados da internet e sistemas internos.
